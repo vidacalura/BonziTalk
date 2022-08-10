@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://kit.fontawesome.com/f4f13ff542.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="CSS/output.css">
+        <title> BonziTalk </title>
+
+    </head>
+
+
+    <body class="bg-gray-200 text-white md:overflow-y-hidden overflow-x-hidden">
+        
+        <main class="flex">
+            
+            <section class="h-screen w-screen lg:w-[70vw]">
+                <!-- Vídeo chat -->
+                <div class="p-8">
+                    <div id="" class="md:flex md:gap-4">
+                        <div class="cam-div">
+                            <img src="https://imgs.search.brave.com/cC3e76N5GY0y2Cye-OfkVorA563rzczHbnnuPHza8EY/rs:fit:1200:1079:1/g:ce/aHR0cHM6Ly9pLmt5/bS1jZG4uY29tL2Vu/dHJpZXMvaWNvbnMv/b3JpZ2luYWwvMDAw/LzAzMy80MjEvY292/ZXIyLmpwZw" alt="" class="object-cover">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controles -->
+                <div id="controles" class="absolute flex justify-center w-full lg:w-[70vw] bottom-8 gap-4">
+                    <div title="Ligar câmera" class="controle-div bg-gray-400"> <i class="fa-solid fa-video"> </i> </div>
+                    <div title="Ligar microfone" class="controle-div bg-gray-400"> <i class="fa-solid fa-microphone"> </i> </div>
+                    <div title="Compartilhar tela" class="controle-div bg-gray-400"> <i class="fa-solid fa-display"> </i> </div>
+                    <div title="Sair da chamada" class="controle-div bg-[#FF4545]"> <i class="fa-solid fa-phone-slash"> </i> </div>
+                </div>
+            </section>
+
+            <section class="hidden lg:block shadow-md">
+                <!-- Chat -->
+                <div class="bg-gray-100 absolute rounded-tl-3xl right-0 bottom-0 w-[25vw] h-[90vh]">
+                    <!-- Botão participantes -->
+                    <div class="absolute right-4 pt-4"> <button title="Participantes" class="bg-gray-400 w-10 h-10 rounded-full shadow-sm"> <i class="fa-solid fa-user-group"> </i> </button> </div>
+
+                    <!-- Mensagens -->
+                    <div class="w-full h-[78vh] pt-16 px-8 2xl:text-2xl">
+                        <div class="flex">
+                            <div class=""> <img src="https://imgs.search.brave.com/cC3e76N5GY0y2Cye-OfkVorA563rzczHbnnuPHza8EY/rs:fit:1200:1079:1/g:ce/aHR0cHM6Ly9pLmt5/bS1jZG4uY29tL2Vu/dHJpZXMvaWNvbnMv/b3JpZ2luYWwvMDAw/LzAzMy80MjEvY292/ZXIyLmpwZw" alt="" class="w-10 2xl:w-24 h-10 2xl:h-24 rounded-full object-cover shadow-md"> </div>
+                            <div class="w-full p-2 2xl:p-6"> <p class="bg-gray-300 rounded-lg w-full p-4 shadow-sm"> Bruh </p> </div>
+                        </div>
+                    </div>
+
+                    <!-- Textbox -->
+                    <div class="flex w-[25vw] 2xl:text-2xl absolute bottom-3 gap-2 px-6 2xl:px-12">
+                        <input type="text" id="chat-txtbox" class="text-gray-300 border-none outline-none w-full h-[5vh] rounded-3xl px-3 p-1 shadow-md" placeholder="Digite aqui!">
+                        <button title="Enviar" class="bg-gray-400 rounded-full px-3 shadow-md"> > </button>
+                    </div> 
+                </div>
+
+                <!-- Aba de Participantes -->
+                <div class="hidden bg-gray-100 absolute rounded-tl-3xl right-0 bottom-0 w-[25vw] h-[90vh]">
+                    <h2> Participantes </h2>
+
+                    <!-- Participantes -->
+                    <div>
+
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+    </body>
+
+</html>

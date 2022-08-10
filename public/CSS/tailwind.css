@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+.cam-div{
+
+    @apply rounded-lg bg-gray-100 w-full h-auto shadow-md overflow-hidden mb-6;
+
+}
+
+.controle-div{
+
+    @apply text-3xl pt-[14px] text-center rounded-full w-16 h-16 cursor-pointer shadow-md;
+
+}
