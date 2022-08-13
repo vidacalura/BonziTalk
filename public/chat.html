@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://kit.fontawesome.com/f4f13ff542.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="CSS/output.css">
+        <script src="./JS/chat.js" defer> </script>
         <title> BonziTalk </title>
 
     </head>
@@ -29,37 +30,52 @@
 
                 <!-- Controles -->
                 <div id="controles" class="absolute flex justify-center w-full lg:w-[70vw] bottom-8 gap-4">
-                    <div title="Ligar câmera" class="controle-div bg-gray-400"> <i class="fa-solid fa-video"> </i> </div>
-                    <div title="Ligar microfone" class="controle-div bg-gray-400"> <i class="fa-solid fa-microphone"> </i> </div>
-                    <div title="Compartilhar tela" class="controle-div bg-gray-400"> <i class="fa-solid fa-display"> </i> </div>
-                    <div title="Sair da chamada" class="controle-div bg-[#FF4545]"> <i class="fa-solid fa-phone-slash"> </i> </div>
+                    <div id="btn-camera" title="Ligar câmera" class="controle-div bg-gray-400"> <i class="fa-solid fa-video"> </i> </div>
+                    <div id="btn-microfone" title="Ligar microfone" class="controle-div bg-gray-400"> <i class="fa-solid fa-microphone"> </i> </div>
+                    <div id="btn-compartilhar-tela" title="Compartilhar tela" class="controle-div bg-gray-400"> <i class="fa-solid fa-display"> </i> </div>
+                    <div id="btn-sair-chamada" title="Sair da chamada" class="controle-div bg-[#FF4545]"> <i class="fa-solid fa-phone-slash"> </i> </div>
                 </div>
             </section>
 
             <section class="hidden lg:block shadow-md">
                 <!-- Chat -->
-                <div class="bg-gray-100 absolute rounded-tl-3xl right-0 bottom-0 w-[25vw] h-[90vh]">
-                    <!-- Botão participantes -->
-                    <div class="absolute right-4 pt-4"> <button title="Participantes" class="bg-gray-400 w-10 h-10 rounded-full shadow-sm"> <i class="fa-solid fa-user-group"> </i> </button> </div>
+                <div id="chat-div" class="bg-gray-100 absolute rounded-tl-3xl right-0 bottom-0 w-[25vw] h-[90vh] transition-all ease-in-out">
+                    <!-- Botões chat -->
+                    <div class="flex w-full justify-between absolute px-4 pt-4">
+                        <!-- Minimizar chat -->
+                        <button id="btn-min-chat" title="Minimizar chat"> X </button>
+
+                        <!-- Botão participantes -->
+                        <div class=""> <button id="btn-participantes-menu" title="Participantes" class="bg-gray-400 w-10 h-10 rounded-full shadow-sm"> <i class="fa-solid fa-user-group"> </i> </button> </div>
+                    </div>
 
                     <!-- Mensagens -->
-                    <div class="w-full h-[78vh] pt-16 px-8 2xl:text-2xl">
+                    <div class="w-full h-[78vh] pt-20 px-8 text-lg">
                         <div class="flex">
-                            <div class=""> <img src="https://imgs.search.brave.com/cC3e76N5GY0y2Cye-OfkVorA563rzczHbnnuPHza8EY/rs:fit:1200:1079:1/g:ce/aHR0cHM6Ly9pLmt5/bS1jZG4uY29tL2Vu/dHJpZXMvaWNvbnMv/b3JpZ2luYWwvMDAw/LzAzMy80MjEvY292/ZXIyLmpwZw" alt="" class="w-10 2xl:w-24 h-10 2xl:h-24 rounded-full object-cover shadow-md"> </div>
-                            <div class="w-full p-2 2xl:p-6"> <p class="bg-gray-300 rounded-lg w-full p-4 shadow-sm"> Bruh </p> </div>
+                            <div class=""> <img src="https://imgs.search.brave.com/cC3e76N5GY0y2Cye-OfkVorA563rzczHbnnuPHza8EY/rs:fit:1200:1079:1/g:ce/aHR0cHM6Ly9pLmt5/bS1jZG4uY29tL2Vu/dHJpZXMvaWNvbnMv/b3JpZ2luYWwvMDAw/LzAzMy80MjEvY292/ZXIyLmpwZw" alt="" class="w-12 h-12 rounded-full object-cover shadow-md"> </div>
+                            <div class="w-full p-2"> <p class="bg-gray-300 rounded-lg w-full p-3 shadow-sm"> Bruh </p> </div>
                         </div>
                     </div>
 
                     <!-- Textbox -->
                     <div class="flex w-[25vw] 2xl:text-2xl absolute bottom-3 gap-2 px-6 2xl:px-12">
-                        <input type="text" id="chat-txtbox" class="text-gray-300 border-none outline-none w-full h-[5vh] rounded-3xl px-3 p-1 shadow-md" placeholder="Digite aqui!">
-                        <button title="Enviar" class="bg-gray-400 rounded-full px-3 shadow-md"> > </button>
+                        <input type="text" id="chat-textbox" class="text-gray-300 border-none outline-none w-full h-[5vh] rounded-full px-3 p-1 shadow-md" placeholder="Digite aqui!">
+                        <button id="btn-chat-env" title="Enviar" class="bg-gray-400 rounded-full px-3 shadow-md"> > </button>
                     </div> 
                 </div>
 
                 <!-- Aba de Participantes -->
-                <div class="hidden bg-gray-100 absolute rounded-tl-3xl right-0 bottom-0 w-[25vw] h-[90vh]">
-                    <h2> Participantes </h2>
+                <div id="menu-participantes" class="hidden bg-gray-100 absolute rounded-tl-3xl right-0 bottom-0 w-[25vw] h-[90vh] transition-all ease-in-out">
+                    <!-- Botões menu participantes -->
+                    <div class="flex w-full justify-between absolute px-4 pt-4">
+                        <!-- Minimizar chat -->
+                        <button id="btn-min-chat" title="Minimizar chat"> X </button>
+
+                        <!-- Botão voltar para chat -->
+                        <div class=""> <button id="btn-chat" title="Chat" class="bg-gray-400 w-10 h-10 rounded-full shadow-sm"> <i class="fa-solid fa-message"> </i> </button> </div>
+                    </div>
+
+                    <h2 class="text-xl font-bold pt-16 px-6"> Participantes: </h2>
 
                     <!-- Participantes -->
                     <div>

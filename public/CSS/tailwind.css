@@ -10,6 +10,6 @@
 
 .controle-div{
 
-    @apply text-3xl pt-[14px] text-center rounded-full w-16 h-16 cursor-pointer shadow-md;
+    @apply text-2xl pt-3 text-center rounded-full w-14 h-14 cursor-pointer shadow-md;
 
 }
