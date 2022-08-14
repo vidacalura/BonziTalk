@@ -39,6 +39,12 @@ io.on("connection", (socket) => {
         });
     });
 
+    socket.on("enviarMensagem", (data) => {
+        const { salaId, texto } = data;
+
+        socket.to(salaId).emit("registrarMensagem", texto);
+    });
+
 });
 
 server.listen(port);
