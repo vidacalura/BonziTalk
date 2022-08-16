@@ -1,148 +1,147 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap');
 
-body{
+*{
     margin: 0;
     padding: 0;
     font-family: Roboto;
-    box-sizing: border-box;
-    background-color: #282828;
 }
 
-.principal{
+.topo{
+    background-color: #fff;
+    padding: 2em;
+}
+
+.conteudo{
+    margin-bottom: 30px;
+}
+
+.conteudo-principal{
     display: flex;
-    justify-content:space-between
-}
-
-
-
-.principal-call{
-    width: 1200px;
-    height: 600px;
-    background-color: #434343;
-    margin: 40px 50px;
-    border-radius: 45px;
-}
-
-
-.secondary-call{
-    display: flex;
-    margin-left: 70px;
-}
-
-.call1{
-    width: 280px;
-    height: 180px;
-    background-color: #434343;
-    border-radius: 35px;
-}
-
-.call2{
-    width: 280px;
-    height: 180px;
-    background-color: #434343;
-    margin-left: 140px;
-    border-radius: 35px;
-}
-
-.call3{
-    width: 280px;
-    height: 180px;
-    background-color: #434343;
-    margin-left: 140px;
-    border-radius: 35px;
-}
-
-
-.controls{
-    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
-    justify-content: center;
-    margin-left: -900px;
-    margin-top: 30px;
+    background-color: #A073FF;
 }
 
-.controls a{
-    margin: 30px;
-    transition: 0.5s;
+.conteudo-texto{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 
-.controls i{
-    color: #fff;
-    padding: 10px;
+.conteudo-texto h2{
+    font-weight: 700;
+    font-size: 40px;
+    color: #121212;
+}
+
+.conteudo-texto p{
+    font-weight: 500;
+    font-size: 20px;
+    color: #121212;
+}
+
+.conteudo-texto input{
+    background-color: #fff;
+    border-radius: 10px;
+    border: none;
+    width: 150px;
+    height: 54px;
+    font-weight: 700;
+    font-size: 20px;
+    color: #5900FF;
     cursor: pointer;
-    border: 20px solid #363636;
-    border-radius: 70px;
-    background-color: #363636;
-    transition: 0.5s
 }
 
-.controls i:hover{
-    transform: translateY(-10px);
-    background-color: #1a1a1a;
-    border: 20px solid #1a1a1a;
+.conteudo-imagem{
+    display: flex;
+}
+
+.conteudo-meio{
+    padding-bottom: 90px;
+}
+
+.conteudo-meio-termo{
+    display: flex;
+    justify-content: space-around;
+}
+
+.conteudo-meio-texto{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    color: #282828;
+}
+
+.conteudo-meio-texto h2{
+    font-weight: 700;
+    font-size: 40px;
+}
+
+.conteudo-meio-texto p{
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.titulo{
+    padding: 70px;
+    font-weight: 700;
+    font-size: 40px;
+    text-align: center;
+    color: #282828;
+}
+
+.squares{
+    display: grid;
+    grid-template-columns: 600px 500px;
+    gap: 60px;
+    justify-content: center;
     
 }
 
-.fa-solid.fa-phone-slash{
-    border: 20px solid #ff4545;
-    background-color: #ff4545;
-    transition: 0.5s;
+.square1{
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0px 4px 20px 8px rgba(0, 0, 0, 0.25);
+    height: 500px;
+    width: 600px;
+    background-color: #D9D9D9;
+    padding: 10px;   
 }
 
-.fa-solid.fa-phone-slash:hover{
-    transform: translateY(0px);
-    border: 20px solid #ff4545;
-    background-color: #ff4545;
+.square2{
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0px 4px 20px 8px rgba(0, 0, 0, 0.25);
+    height: 500px;
+    width: 600px;
+    background-color: #D9D9D9;
+    padding: 10px;
+}
+
+.square3{
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0px 4px 20px 8px rgba(0, 0, 0, 0.25);
+    height: 500px;
+    width: 600px;
+    background-color: #D9D9D9;
+    padding: 10px;
+}
+
+.square4{
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0px 4px 20px 8px rgba(0, 0, 0, 0.25);
+    height: 500px;
+    width: 600px;
+    background-color: #D9D9D9;
+    padding: 10px;
 }
 
 .chat{
-    margin: 0;
-}
-
-.text-chat{
-    width: 450px;
-    height: 600px;
-    background-color: #434343;
-    margin-top: 40px;
-    border-radius: 20px;
-}
-
-.topo-chat{
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-right: 30px;
-}
-
-.text-chat h2{
-    padding: 30px;
-    color: #fff;
-}
-
-.espaco{
-    height: 400px;
-}
-
-.text-chat input{
-    margin-left: 30px;
-    padding: 20px;
-    width: 300px;
-    border: none;
-    border-radius: 40px;
-    outline: none;
-}
-
-.text-chat i{
-    padding: 15px;
-    border: #fff solid 1px;
-    border-radius: 40px;
-    color: #363636;
-    background-color: #fff;
-    margin-left: 12px;
-    cursor: pointer;
-    transition: 0.4s;
-}
-
-.text-chat i:hover{
-    background-color: #e7e7e7;
+    width: 340px;
+    height: 300px;
+    border: 3px solid #000;
+    border-radius: 15px;
 }
