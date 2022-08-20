@@ -1,5 +1,4 @@
 let socket = io();
-const peer = new Peer(undefined, { host: "/", port: 3001 });
 
 const videoGrid = document.getElementById("video-grid-1");
 const btnLigarCamera = document.getElementById("btn-camera");
@@ -24,47 +23,35 @@ btnChatEnviarMsg.addEventListener("click", enviarMensagem);
 const menuParticipantesDiv = document.getElementById("menu-participantes");
 
 const meuVideo = document.createElement("video");
-meuVideo.muted = true;  // Muta o seu áudio para você mesmo
-
-/* PeerJS */
-peer.on("open", (id) => {
-    entrarSala(id);
-});
+meuVideo.muted = true;
 
 const peers = { };
 
+navigator.mediaDevices.getUserMedia({
+    video: true,
+    audio: true
+})
+.then((stream) => {
+    adicionarVideoStream(meuVideo, stream);
 
-function alterarEstadoCamera(id, stream){
+    peer.on("call", (call) => {
+        call.answer(stream);
 
-    navigator.mediaDevices.getUserMedia({
-        video: true,
-        audio: true
-    })
-    .then((stream) => {
-        adicionarVideoStream(meuVideo, stream);
-    
-        peer.on("call", (call) => {
-            call.answer(stream);
-    
-            const video = document.createElement("video");
-            call.on("stream", (userVideoStream) => {
-                adicionarVideoStream(video, userVideoStream);
-            }); 
-        });
-    
-        const call = peer.call(id, stream);
-    
         const video = document.createElement("video");
         call.on("stream", (userVideoStream) => {
             adicionarVideoStream(video, userVideoStream);
-        });
-        call.on("close", () => {
-            video.parentElement.remove();
-        });
-
-        peers[id] = call;
-
+        }); 
     });
+
+    socket.on("usuarioConectado", (userId) => {
+        conectarNovoUsuario(userId, stream);
+    });
+});
+
+
+function alterarEstadoCamera(){
+
+
 
 }
 
@@ -127,12 +114,19 @@ function entrarSala(id){
 
 }
 
-function conectarNovoUsuario(){
+function conectarNovoUsuario(id, stream){
 
-    const videoDiv = document.createElement("div");
-    videoDiv.classList.add("cam-div");
+    const call = peer.call(id, stream);
+    
+    const video = document.createElement("video");
+    call.on("stream", (userVideoStream) => {
+        adicionarVideoStream(video, userVideoStream);
+    });
+    call.on("close", () => {
+        video.parentElement.remove();
+    });
 
-    videoGrid.appendChild(videoDiv);
+    peers[id] = call;
 
 }
 
@@ -180,11 +174,15 @@ chatTextbox.addEventListener("keyup", (e) => {
 });
 
 
-/* Server listeners */
-socket.on("usuarioConectado", (userId) => {
-    conectarNovoUsuario();
+/* PeerJS */
+const peer = new Peer(undefined, { host: "/", port: 3001 });
+
+peer.on("open", (id) => {
+    entrarSala(id);
 });
 
+
+/* Server listeners */
 socket.on("usuarioDesconectado", (data) => {
     if (peers[data])
         peers[data].close();
