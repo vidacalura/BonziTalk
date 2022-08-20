@@ -1,0 +1,18 @@
+Criar sala → click:
+	criar objeto da sala em server.js
+	salvar dados do menu
+	criar código da sala
+	redirecionar para chat.ejs (código via GET)
+	
+Entrar sala:
+    conectarNovoUsuario(); // Gera uma tela preta padrão sem vídeo
+    salvar usuário na aba de Participantes
+    receber peer ID pro front-end
+
+Ao apertar botão do mic:
+
+
+Ao apertar botão da câmera:
+
+
+Ao apertar em desconectar:

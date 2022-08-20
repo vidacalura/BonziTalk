@@ -11,7 +11,7 @@ app.set("view engine", "ejs");
 app.use(express.static("./public/"));
 
 app.get("/", (req, res) => {
-    // res.sendFile("index.html", { root: __dirname });
+    res.sendFile("./public/index.html", { root: __dirname });
 });
 
 app.get("/:sala", (req, res) => {
@@ -53,10 +53,7 @@ server.listen(port);
 /* todo
 
 - Firebase
-- Permitir criação de salas na home
-- Criar dados de salas (objetos)
 - Bug tela preta
-- Fazer que cam é compartilhada apenas quando botão é apertado
 - Captcha para criar sala
 - limite de 250 conexões
 
