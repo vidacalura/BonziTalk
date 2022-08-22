@@ -4,18 +4,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js" defer> </script>
     <script src="https://kit.fontawesome.com/f4f13ff542.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./CSS/style.css">
+    <script src="./JS/salagen.js" defer> </script>
     <title> BonziTalk </title>
 </head>
 <body>
-    <a href="#">
-        <header class="topo">
-            <div class="logo-header">
-                <img src="./img/bonzitalk logo.png" alt="logo-header">
+
+    <div id="menu-bg" class="menu-bg">
+        <div id="myModal" class="main-modal">
+
+            <div class="">
+                <div>
+                    <h2> BEM-VINDO! </h2>
+                    <p> Escolha uma das opções abaixo: </p>
+                </div>
+
+                <div class="menu-btn-div">
+                    <button id="criar-sala-btn"> CRIAR SALA </button>
+                    <button id="entrar-sala-btn"> ENTRAR </button>
+                </div>
             </div>
-        </header>
-    </a>
+
+            <div>
+
+            </div>
+
+            <div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <header>
+        <a href="#">
+            <img src="./img/bonzitalk logo.png" alt="logo-header">
+            <h2> BonziTalk </h2>
+        </a>
+    </header>
 
     <main class="conteudo">
         <section class="conteudo-principal">
@@ -23,7 +51,7 @@
                 <h1>Converse a hora que quiser!</h1>
                 <h3>Com o bonziTalk você pode ficar à vontade e jogar a conversa fora.</h3>
                 <div class="alinhar-centro">
-                    <button> Começar </button>
+                    <button id="myBtn"> Começar </button>
                 </div>
             </div>
             <div class="conteudo-imagem">
@@ -77,7 +105,6 @@
         </div>
         <div class="media">
         <ul>
-            <li><a><i class="fa-brands fa-twitter fa-xl"></i></a></li>
             <li><a href="https://www.instagram.com/bonzitech/" target="_blank"><i class="fa-brands fa-instagram fa-xl"></i></a></li>
             <li><a href="https://github.com/vidacalura/BonziTalk" target="_blank"><i class="fa-brands fa-github fa-xl"></i></a></li>
         </ul>

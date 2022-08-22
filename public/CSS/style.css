@@ -16,20 +16,97 @@ main{
     margin-bottom: 50px;
 }
 
-.topo{
+header{
+
     background-color: transparent;
-    padding-top: 1em;
+    padding: 1em 2rem;
     width: 100vw;
     display: flex;
-    justify-content: center;
     cursor: pointer;
     transition: 0.5s;
-    position: fixed;
+    position: absolute;
 }
 
-.topo img{
+header a{
+    display: flex;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    gap: 1rem;
+}
+
+header img{
     width: 70px;
     height: auto;
+}
+
+.menu-bg{
+
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+
+}
+.main-modal{
+
+    text-align: center;
+    width: 320px;
+    border-radius: 32px;
+    padding: 8rem 4rem;
+    margin-top: 12vh;
+    position: absolute;
+    background-color: #121212;
+    font-weight: bold;
+    color: white;
+
+}
+.main-modal h2{
+
+    padding-bottom: 2rem;
+    font-size: 36px;
+
+}
+.main-modal p{
+
+    font-size: 20px;
+    padding-bottom: 5rem;
+
+}
+.menu-btn-div{
+
+    display: flex;
+    justify-content: space-between;
+
+}
+.menu-btn-div button{
+
+    padding: 0.75rem;
+    font-size: 18px;
+    border-radius: 10px;
+    width: 128px;
+    font-weight: bold;
+    box-shadow: 0px 0px 11px 14px #2E2E2E40;
+    cursor: pointer;
+
+}
+#criar-sala-btn{
+
+    border: none;
+    background-color: white;
+    color: #121212;
+
+}
+#entrar-sala-btn{
+
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+
 }
 
 .logo-reader{
@@ -194,39 +271,6 @@ main{
     padding-top: 15px;
 }
 
-.baloon1{
-    width: 163px;
-    height: 58px;
-    background: #BCBCBC;
-    border-radius: 0px 20px 20px 20px;
-    margin: 50px;
-}
-
-.baloon1 p{
-    font-weight: 700;
-    font-size: 14px;
-    text-align: center;
-    padding-top: 20px;
-    padding-right: 15px;
-}
-
-.baloon2{
-    width: 163px;
-    height: 58px;
-    background: #BCBCBC;
-    border-radius: 20px 0px 20px 20px;
-    margin: 50px;
-    transform: translateX(230px)
-}
-
-.baloon2 p{
-    font-weight: 700;
-    font-size: 14px;
-    text-align: center;
-    padding-top: 20px;
-    padding-right: 23px;
-}
-
 footer{
     background-color: #121212;
     color: #fff;
@@ -262,6 +306,7 @@ footer{
     text-decoration: none;
     list-style-type: none;
 }
+
 
 @media only screen and (max-width: 900px) {
     .bottom{
