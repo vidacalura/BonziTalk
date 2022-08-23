@@ -2,6 +2,7 @@ let socket = io();
 
 const criarSalaBtn = document.getElementById("criar-sala-btn");
 const entrarSalaBtn = document.getElementById("entrar-sala-btn");
+const menuBg = document.getElementById("menu-bg");
 
 // Get the modal
 var modal = document.getElementById("myModal");
@@ -26,6 +27,7 @@ window.onclick = function(event) {
 
     if (event.target.id == "menu-bg") {
         modal.style.display = "none";
+        menuBg.style.display = "none";
     }
     
 }
