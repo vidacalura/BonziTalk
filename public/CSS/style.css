@@ -44,7 +44,7 @@ header img{
 .menu-bg{
 
     position: fixed;
-    display: flex;
+    display: none;
     justify-content: center;
     width: 100vw;
     height: 100vh;
@@ -54,6 +54,7 @@ header img{
 }
 .main-modal{
 
+    display: none;
     text-align: center;
     width: 320px;
     border-radius: 32px;
@@ -65,7 +66,7 @@ header img{
     color: white;
 
 }
-.main-modal h2{
+#menu-principal h2{
 
     padding-bottom: 2rem;
     font-size: 36px;
@@ -90,22 +91,81 @@ header img{
     border-radius: 10px;
     width: 128px;
     font-weight: bold;
-    box-shadow: 0px 0px 11px 14px #2E2E2E40;
     cursor: pointer;
 
 }
-#criar-sala-btn{
+#menu-criar-sala-btn{
 
     border: none;
     background-color: white;
     color: #121212;
+    box-shadow: 0px 0px 11px 14px #2E2E2E40;
 
 }
-#entrar-sala-btn{
+#menu-entrar-sala-btn{
 
     background-color: transparent;
     color: white;
     border: 2px solid white;
+    box-shadow: 5px 5px 7px black;
+
+}
+.menu-titulo{
+
+    position: absolute;
+    top: 0;
+    text-align: center;
+    font-size: 20px;
+    padding: 1.25rem 0rem;
+    border-radius: 0px 0px 40px 40px;
+    width: 50%;
+    background-color: #272727;
+
+}
+#menu-criar-sala,
+#menu-entrar-sala{
+
+    text-align: start;
+
+}
+.main-modal form{
+
+    margin-top: 2.5rem;
+
+}
+.main-modal form input{
+
+    width: 100%;
+    margin: 0.25rem 0px 1.25rem 0px;
+    background: rgba(217, 217, 217, 0.1);
+    border-radius: 30px;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-left: -1rem;
+    color: white;
+    outline: none;
+    box-shadow: 3px 3px 7px #111;
+
+}
+.main-modal form label{
+
+    font-weight: bold;
+
+}
+.main-modal form button{
+
+    text-align: center;
+    margin-top: 2rem;
+    background-color: #7000C8;
+    font-size: 18px;
+    color: white;
+    padding: 0.75rem 0.5rem;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    width: 128px;
+    box-shadow: 0px 0px 11px 14px rgba(46, 46, 46, 0.25);
 
 }
 

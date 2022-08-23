@@ -15,24 +15,56 @@
     <div id="menu-bg" class="menu-bg">
         <div id="myModal" class="main-modal">
 
-            <div class="">
+            <div id="menu-principal">
                 <div>
                     <h2> BEM-VINDO! </h2>
                     <p> Escolha uma das opções abaixo: </p>
                 </div>
 
                 <div class="menu-btn-div">
-                    <button id="criar-sala-btn"> CRIAR SALA </button>
-                    <button id="entrar-sala-btn"> ENTRAR </button>
+                    <button id="menu-criar-sala-btn"> CRIAR SALA </button>
+                    <button id="menu-entrar-sala-btn"> ENTRAR </button>
                 </div>
             </div>
 
-            <div>
+            <div id="menu-criar-sala">
+                <div class="alinhar-centro">
+                    <div class="menu-titulo">
+                        <h2> CRIAR SALA </h2>
+                    </div>
+                </div>
 
+                <form>
+                    <label> USERNAME </label>
+                    <input id="username-criar-sala" type="text" required>
+
+                    <label> PARTICIPANTES </label>
+                    <input id="participantes-criar-sala" type="number" min="2" max="10" required>
+
+                    <div class="alinhar-centro">
+                        <button id="criar-sala-btn"> CRIAR SALA </button>
+                    </div>
+                </form>
             </div>
 
-            <div>
+            <div id="menu-entrar-sala">
+                <div class="alinhar-centro">
+                    <div class="menu-titulo">
+                        <h2> ENTRAR </h2>
+                    </div>
+                </div>
+                
+                <form>
+                    <label> USERNAME </label>
+                    <input id="username-entrar-sala" type="text" required>
 
+                    <label> CÓDIGO DA SALA </label>
+                    <input id="codigo-entrar-sala" type="text" placeholder="Ex: AW3R5" required>
+
+                    <div class="alinhar-centro">
+                        <button id="entrar-sala-btn"> ENTRAR </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
