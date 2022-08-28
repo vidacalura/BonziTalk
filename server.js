@@ -38,7 +38,7 @@ for (let i = 0; i < 25; i++){
         "salaId": null,
         "conexoesSala": 0,
         "participantesMax": null,
-        "participantes": []
+        "participantes": [[]]
     };
 
     salas[i] = sala;
@@ -51,7 +51,7 @@ const io = require("socket.io")(server);
 
 io.on("connection", (socket) => {
 
-    socket.on("entrarSala", (data) => {
+    socket.on("conectarSala", (data) => {
         const { salaId, userId } = data;
 
         // verificação de existência da sala
@@ -92,9 +92,6 @@ io.on("connection", (socket) => {
 
         // Update participantes - Backend
         salas[salaNum].conexoesSala++;
-        // salas[salaNum].participantes.push(username);
-
-        // Update participantes - Frontend
 
 
         io.sockets.emit("receberCodigo", salas[salaNum].salaId);
@@ -105,9 +102,29 @@ io.on("connection", (socket) => {
         const cod = data;
 
         // Procurar sala
-            // Se achar -> conectar
+        for (let  i = 0; i < 25; i++){
+            if (salaId == salas[i].salaId){
+                if (salas[i].conexoesSala < salas[i].participantesMax){
+                    salas[i].conexoesSala++;
+                    // Redirecionar para sala
+                }
+            }
+        }
 
-        // Update participantes
+    });
+
+    socket.on("updateParticipantes", (data) => {
+        const { username, imgPath, salaId } = data;
+
+        const userInfo = [username, imgPath];
+       
+        for (let  i = 0; i < 25; i++){
+            if (salaId == salas[i].salaId){
+                salas[i].participantes.push(userInfo);
+                io.sockets.emit("updateAbaParticipantes", salas[i].participantes);
+            }
+        }
+
     });
 
     socket.on("enviarMensagem", (data) => {

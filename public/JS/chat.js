@@ -15,6 +15,7 @@ const chatTextbox = document.getElementById("chat-textbox");
 const btnChatEnviarMsg = document.getElementById("btn-chat-env");
 btnChatEnviarMsg.addEventListener("click", enviarMensagem);
 const menuParticipantesDiv = document.getElementById("menu-participantes");
+const participantesContainer = document.querySelector(".div-participantes-container");
 
 const meuVideo = document.createElement("video");
 meuVideo.muted = true;
@@ -24,6 +25,12 @@ const peers = { };
 
 const videoOn = (localStorage.getItem("videoOn") == "on");
 const audioOn = (localStorage.getItem("audioOn") == "on");
+
+socket.emit("updateParticipantes", { 
+    username: localStorage.getItem("username"), 
+    imgPath: localStorage.getItem("pfp"), 
+    salaId
+});
 
 navigator.mediaDevices.getUserMedia({
     video: videoOn,
@@ -44,13 +51,13 @@ navigator.mediaDevices.getUserMedia({
     socket.on("usuarioConectado", (userId) => {
         conectarNovoUsuario(userId, stream);
 
-        // socket.emit("updateParticipantes", { username, imgPath });
+        /* socket.emit("updateParticipantes", { 
+            username: localStorage.getItem("username"), 
+            imgPath: localStorage.getItem("pfp"), 
+            salaId
+        }); */
     });
 });
-
-function minimizarChat(){
-
-}
 
 function mostrarMenuParticipantes(){
 
@@ -89,7 +96,7 @@ function adicionarVideoStream(video, stream){
 
 function entrarSala(id){
 
-    socket.emit("entrarSala", { salaId, userId: id });
+    socket.emit("conectarSala", { salaId, userId: id });
 
 }
 
@@ -106,6 +113,32 @@ function conectarNovoUsuario(id, stream){
     });
 
     peers[id] = call;
+
+}
+
+function atualizarMenuParticipantes(data){
+
+    while (participantesContainer.hasChildNodes()){
+        participantesContainer.removeChild(participantesContainer.firstChild);
+    }
+        
+
+    for (let i = data.length - 1; i > 0; i--){
+        const divParticipante = document.createElement("div");
+        const pfpParticipante = document.createElement("img");
+        const nomeParticipante = document.createElement("p");
+
+        pfpParticipante.src = data[i][1];
+        pfpParticipante.className = "w-16 h-16 rounded-full";
+        nomeParticipante.textContent = data[i][0];
+        nomeParticipante.className = "text-lg pt-1 font-bold";
+
+        divParticipante.className = "flex gap-4 items-center px-2";
+        divParticipante.appendChild(pfpParticipante);
+        divParticipante.appendChild(nomeParticipante);
+
+        participantesContainer.appendChild(divParticipante);
+    }
 
 }
 
@@ -168,4 +201,8 @@ socket.on("usuarioDesconectado", (data) => {
 
 socket.on("registrarMensagem", (data) => {
     registrarMensagem(data);
+});
+
+socket.on("updateAbaParticipantes", (data) => {
+    atualizarMenuParticipantes(data);
 });

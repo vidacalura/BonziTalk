@@ -171,7 +171,7 @@ header img{
     font-weight: bold;
 
 }
-.main-modal form button{
+.main-modal form .button{
 
     text-align: center;
     margin-top: 2rem;
@@ -185,6 +185,11 @@ header img{
     border: none;
     width: 128px;
     box-shadow: 0px 0px 11px 14px rgba(46, 46, 46, 0.25);
+
+}
+.margin0auto{
+
+    margin: 0 auto;
 
 }
 #menu-opcoes-chamada{

@@ -607,6 +607,10 @@ video {
   height: 5vh;
 }
 
+.h-16 {
+  height: 4rem;
+}
+
 .w-screen {
   width: 100vw;
 }
@@ -627,16 +631,20 @@ video {
   width: 3rem;
 }
 
+.w-16 {
+  width: 4rem;
+}
+
+.items-center {
+  align-items: center;
+}
+
 .justify-end {
   justify-content: flex-end;
 }
 
 .justify-center {
   justify-content: center;
-}
-
-.justify-between {
-  justify-content: space-between;
 }
 
 .gap-4 {
@@ -743,6 +751,14 @@ video {
 
 .pt-16 {
   padding-top: 4rem;
+}
+
+.pb-8 {
+  padding-bottom: 2rem;
+}
+
+.pt-1 {
+  padding-top: 0.25rem;
 }
 
 .text-lg {

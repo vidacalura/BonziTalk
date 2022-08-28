@@ -96,7 +96,7 @@ function mostrarMenuOpcoesChamada(username, cod){
     efetuarConexaoChamada.addEventListener("click", () => {
         const switchVideo = document.getElementById("switch-video").value;
         const switchAudio = document.getElementById("switch-audio").value;
-        salvarUsuarioLocal(username, cod, switchAudio, switchVideo)
+        salvarUsuarioLocal(username, cod, switchAudio, switchVideo);
     });
 
 }
@@ -108,12 +108,12 @@ function salvarUsuarioLocal(username, cod, audio, video){
     localStorage.setItem("videoOn", video);
     localStorage.setItem("audioOn", audio);
 
-    const pfpsArr = ["bonzibuddy1.png", "peedy1", "geenie1", "maxalert1", "merlin1"];
+    const pfpsArr = ["bonzibuddy1.png", "peedy1", "genie1", "maxalert1", "merlin1"];
     const randN = Math.floor(Math.random() * 5);
     const img = pfpsArr[randN];
 
     // Recebe uma foto de perfil
-    const imgPath = "./img/pfps/" + img;
+    const imgPath = "img/pfps/" + img;
 
     localStorage.setItem("pfp", imgPath);
 
