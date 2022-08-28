@@ -9,10 +9,4 @@ Entrar sala:
     salvar usuário na aba de Participantes
     receber peer ID pro front-end
 
-Ao apertar botão do mic:
-
-
-Ao apertar botão da câmera:
-
-
 Ao apertar em desconectar:

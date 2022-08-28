@@ -36,10 +36,10 @@
 
                 <form>
                     <label> USERNAME </label>
-                    <input id="username-criar-sala" type="text" required>
+                    <input id="username-criar-sala" type="text">
 
                     <label> PARTICIPANTES </label>
-                    <input id="participantes-criar-sala" type="number" min="2" max="10" required>
+                    <input id="participantes-criar-sala" type="number" min="2" max="10">
 
                     <div class="alinhar-centro">
                         <button id="criar-sala-btn"> CRIAR SALA </button>
@@ -56,15 +56,42 @@
                 
                 <form>
                     <label> USERNAME </label>
-                    <input id="username-entrar-sala" type="text" required>
+                    <input id="username-entrar-sala" type="text">
 
                     <label> CÓDIGO DA SALA </label>
-                    <input id="codigo-entrar-sala" type="text" placeholder="Ex: AW3R5" required>
+                    <input id="codigo-entrar-sala" type="text" placeholder="Ex: AW3R5">
 
                     <div class="alinhar-centro">
                         <button id="entrar-sala-btn"> ENTRAR </button>
                     </div>
                 </form>
+            </div>
+
+            <!-- Menu opções pré-chamada -->
+            <div id="menu-opcoes-chamada">
+                <h3> Escolha o que deseja ativar para a chamada: </h3>
+
+                <div class="switch-btns-menu-chamada">
+                    <div>
+                        <i class="fa-solid fa-microphone"></i>
+
+                        <label class="switch">
+                            <input type="checkbox" id="switch-audio">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <div>
+                        <i class="fa-solid fa-video"></i>
+
+                        <label class="switch">
+                            <input type="checkbox" id="switch-video">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <button id="efetuar-conexao-chamada"> Feito </button>
             </div>
         </div>
     </div>

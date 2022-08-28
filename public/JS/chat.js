@@ -1,18 +1,12 @@
 let socket = io();
 
 const videoGrid = document.getElementById("video-grid-1");
-const btnLigarCamera = document.getElementById("btn-camera");
-btnLigarCamera.addEventListener("click", alterarEstadoCamera);
-const btnLigarMicrofone = document.getElementById("btn-microfone");
-btnLigarMicrofone.addEventListener("click", alterarEstadoMicrofone);
-/*const btnCompartilharTela = document.getElementById("btn-compartilhar-tela");
-btnCompartilharTela.addEventListener("click", compartilharTela);*/
 const btnSairChamada = document.getElementById("btn-sair-chamada");
-btnSairChamada.addEventListener("click", sairChamada);
+//btnSairChamada.addEventListener("click", sairChamada);
 const chatDiv = document.getElementById("chat-div");
 const mensagensContainer = document.getElementById("mensagens-container");
-const btnMinimizarChat = document.getElementById("btn-min-chat");
-btnMinimizarChat.addEventListener("click", minimizarChat);
+//const btnMinimizarChat = document.getElementById("btn-min-chat");
+//btnMinimizarChat.addEventListener("click", minimizarChat);
 const btnMenuParticipantes = document.getElementById("btn-participantes-menu");
 btnMenuParticipantes.addEventListener("click", mostrarMenuParticipantes);
 const btnChat = document.getElementById("btn-chat");
@@ -25,11 +19,15 @@ const menuParticipantesDiv = document.getElementById("menu-participantes");
 const meuVideo = document.createElement("video");
 meuVideo.muted = true;
 
+const peer = new Peer(undefined, { host: "/", port: 3001 });
 const peers = { };
 
+const videoOn = (localStorage.getItem("videoOn") == "on");
+const audioOn = (localStorage.getItem("audioOn") == "on");
+
 navigator.mediaDevices.getUserMedia({
-    video: true,
-    audio: true
+    video: videoOn,
+    audio: audioOn
 })
 .then((stream) => {
     adicionarVideoStream(meuVideo, stream);
@@ -45,31 +43,12 @@ navigator.mediaDevices.getUserMedia({
 
     socket.on("usuarioConectado", (userId) => {
         conectarNovoUsuario(userId, stream);
+
+        // socket.emit("updateParticipantes", { username, imgPath });
     });
 });
 
-
-function alterarEstadoCamera(){
-
-
-
-}
-
-function alterarEstadoMicrofone(){
-
-
-
-}
-
-function sairChamada(){
-
-
-
-}
-
 function minimizarChat(){
-
-
 
 }
 
@@ -149,6 +128,7 @@ function registrarMensagem(texto){
     const pfpDiv = document.createElement("div");
     const pfpImagem = document.createElement("img");
     pfpImagem.className = "w-12 h-12 rounded-full object-cover shadow-md";
+    pfpImagem.src = localStorage.getItem("pfp");
     pfpDiv.appendChild(pfpImagem);
 
     const textoDiv = document.createElement("div");
@@ -175,8 +155,6 @@ chatTextbox.addEventListener("keyup", (e) => {
 
 
 /* PeerJS */
-const peer = new Peer(undefined, { host: "/", port: 3001 });
-
 peer.on("open", (id) => {
     entrarSala(id);
 });

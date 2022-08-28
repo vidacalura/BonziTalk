@@ -4,10 +4,13 @@ const criarSalaBtn = document.getElementById("criar-sala-btn");
 const entrarSalaBtn = document.getElementById("entrar-sala-btn");
 const menuCriarSalaBtn = document.getElementById("menu-criar-sala-btn");
 const menuEntrarSalaBtn = document.getElementById("menu-entrar-sala-btn");
+const menuPreChamada = document.getElementById("menu-opcoes-chamada");
 const menuPrincipal = document.getElementById("menu-principal");
 const menuCriarSala = document.getElementById("menu-criar-sala");
 const menuEntrarSala = document.getElementById("menu-entrar-sala");
 const menuBg = document.getElementById("menu-bg");
+
+localStorage.clear();
 
 // Get the modal
 var modal = document.getElementById("myModal");
@@ -36,6 +39,7 @@ window.onclick = function(event) {
     if (event.target.id == "menu-bg") {
         modal.style.display = "none";
         menuBg.style.display = "none";
+        menuPreChamada.style.display = "none";
     }
 }
 
@@ -58,7 +62,15 @@ criarSalaBtn.addEventListener("click", () => {
     const username = document.getElementById("username-criar-sala").value;
     const participantes = document.getElementById("participantes-criar-sala").value; // String
 
-    socket.emit("criarSala", { username, participantes });
+    if (participantes >= 2 && participantes <= 10 && username != null && username != ""){
+        menuCriarSala.style.display = "none";
+
+        socket.emit("criarSala", participantes);
+
+        socket.on("receberCodigo", (data) => {
+            mostrarMenuOpcoesChamada(username, data);
+        });
+    }
 
 });
 
@@ -67,6 +79,44 @@ entrarSalaBtn.addEventListener("click", () => {
     const username = document.getElementById("username-entrar-sala").value;
     const cod = document.getElementById("codigo-entrar-sala").value;
 
-    socket.emit("entrarSala", { username, cod });
+    // Validação
+    if (username != null && username != "" && cod != null){
+        menuEntrarSala.style.display = "none";
+
+        mostrarMenuOpcoesChamada(username, cod);
+    }
 
 });
+
+function mostrarMenuOpcoesChamada(username, cod){
+
+    menuPreChamada.style.display = "block";
+
+    const efetuarConexaoChamada = document.getElementById("efetuar-conexao-chamada");
+    efetuarConexaoChamada.addEventListener("click", () => {
+        const switchVideo = document.getElementById("switch-video").value;
+        const switchAudio = document.getElementById("switch-audio").value;
+        salvarUsuarioLocal(username, cod, switchAudio, switchVideo)
+    });
+
+}
+
+function salvarUsuarioLocal(username, cod, audio, video){
+
+    // Salva dados locais
+    localStorage.setItem("username", username);
+    localStorage.setItem("videoOn", video);
+    localStorage.setItem("audioOn", audio);
+
+    const pfpsArr = ["bonzibuddy1.png", "peedy1", "geenie1", "maxalert1", "merlin1"];
+    const randN = Math.floor(Math.random() * 5);
+    const img = pfpsArr[randN];
+
+    // Recebe uma foto de perfil
+    const imgPath = "./img/pfps/" + img;
+
+    localStorage.setItem("pfp", imgPath);
+
+    window.location = "/:" + cod;
+
+}

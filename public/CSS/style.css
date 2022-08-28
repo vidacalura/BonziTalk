@@ -94,6 +94,25 @@ header img{
     cursor: pointer;
 
 }
+#efetuar-conexao-chamada{
+
+    text-align: center;
+    background-color: #7000C8;
+    font-size: 18px;
+    color: white;
+    padding: 0.75rem 0.5rem;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    width: 128px;
+    box-shadow: 0px 0px 11px 14px rgba(46, 46, 46, 0.25);
+    border: none;
+    background-color: white;
+    color: #272727;
+    box-shadow: 0px 0px 11px 14px #2E2E2E40;
+
+}
 #menu-criar-sala-btn{
 
     border: none;
@@ -107,7 +126,7 @@ header img{
     background-color: transparent;
     color: white;
     border: 2px solid white;
-    box-shadow: 5px 5px 7px black;
+    box-shadow: 5px 5px 7px #111;
 
 }
 .menu-titulo{
@@ -167,6 +186,88 @@ header img{
     width: 128px;
     box-shadow: 0px 0px 11px 14px rgba(46, 46, 46, 0.25);
 
+}
+#menu-opcoes-chamada{
+
+    display: none;
+
+}
+#menu-opcoes-chamada h3{ 
+
+    font-size: 24px;
+    padding-bottom: 4rem;
+
+}
+.switch-btns-menu-chamada i{ 
+
+    font-size: 28px;
+    padding-bottom: 4rem;
+
+}
+.switch-btns-menu-chamada{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+
+}
+.switch-btns-menu-chamada div{
+
+    display: flex;
+    gap: 0.5rem;
+
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    border: 2px solid white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 2px;
+    background-color: #ddd;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+input:checked + .slider {
+    background-color: #5900FF;
+}
+input:focus + .slider {
+    box-shadow: 0 0 1px #5900FF;
+}
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+.slider.round {
+    border-radius: 34px;
+}
+.slider.round:before {
+    border-radius: 50%;
 }
 
 .logo-reader{

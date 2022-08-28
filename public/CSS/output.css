@@ -587,10 +587,6 @@ video {
   height: 100vh;
 }
 
-.h-96 {
-  height: 24rem;
-}
-
 .h-\[90vh\] {
   height: 90vh;
 }
@@ -629,6 +625,10 @@ video {
 
 .w-12 {
   width: 3rem;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 
 .justify-center {
@@ -788,8 +788,10 @@ video {
 
 .cam-div {
   margin-bottom: 1.5rem;
+  display: flex;
   height: auto;
   width: 100%;
+  justify-content: center;
   overflow: hidden;
   border-radius: 0.5rem;
   --tw-bg-opacity: 1;
