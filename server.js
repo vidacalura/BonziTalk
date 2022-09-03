@@ -72,6 +72,7 @@ io.on("connection", (socket) => {
             for (let  i = 0; i < 25; i++){
                 if (salaId == salas[i].salaId){
                     salas[i].conexoesSala--;
+                    // remover usuário da lista de participantes
                 }
             }
         });
@@ -113,6 +114,12 @@ io.on("connection", (socket) => {
 
     });
 
+    socket.on("usuarioConectadoSemCam", (data) => {
+        const { salaId, pfp } = data;
+        
+        socket.to(salaId).emit("usuarioConectadoSemCam", pfp);
+    });
+
     socket.on("updateParticipantes", (data) => {
         const { username, imgPath, salaId } = data;
 
@@ -121,7 +128,9 @@ io.on("connection", (socket) => {
         for (let  i = 0; i < 25; i++){
             if (salaId == salas[i].salaId){
                 salas[i].participantes.push(userInfo);
-                io.sockets.emit("updateAbaParticipantes", salas[i].participantes);
+                const participantes = salas[i].participantes;
+
+                io.sockets.emit("updateAbaParticipantes", { participantes, salaId });
             }
         }
 
@@ -147,3 +156,5 @@ function codeAle(){
 }
 
 server.listen(port);
+
+// Apenas áudio = 2 cams

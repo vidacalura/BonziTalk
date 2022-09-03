@@ -8,6 +8,8 @@ const menuPreChamada = document.getElementById("menu-opcoes-chamada");
 const menuPrincipal = document.getElementById("menu-principal");
 const menuCriarSala = document.getElementById("menu-criar-sala");
 const menuEntrarSala = document.getElementById("menu-entrar-sala");
+const videoCheckBox = document.getElementById("switch-video");
+const audioCheckBox = document.getElementById("switch-audio");
 const menuBg = document.getElementById("menu-bg");
 
 localStorage.clear();
@@ -19,7 +21,7 @@ var modal = document.getElementById("myModal");
 var btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
-//var span = document.getElementsByClassName("close")[0];
+var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
@@ -31,15 +33,13 @@ btn.onclick = function() {
 }
 
 // When the user clicks on <span> (x), close the modal
-/*span.onclick = function() {
-    modal.style.display = "none";
-}*/
+span.onclick = function() {
+    esconderModal();
+}
 
 window.onclick = function(event) {
     if (event.target.id == "menu-bg") {
-        modal.style.display = "none";
-        menuBg.style.display = "none";
-        menuPreChamada.style.display = "none";
+        esconderModal();
     }
 }
 
@@ -120,3 +120,25 @@ function salvarUsuarioLocal(username, cod, audio, video){
     window.location = "/:" + cod;
 
 }
+
+function esconderModal(){
+    modal.style.display = "none";
+    menuBg.style.display = "none";
+    menuPreChamada.style.display = "none";
+}
+
+videoCheckBox.addEventListener("click", () => {
+    if (videoCheckBox.value == "on")
+        videoCheckBox.value = "off";
+    else 
+        videoCheckBox.value = "on";
+});
+
+audioCheckBox.addEventListener("click", () => {
+    if (audioCheckBox.value == "on")
+        audioCheckBox.value = "off";
+    else 
+        audioCheckBox.value = "on";
+
+    console.log(audioCheckBox.value);
+});

@@ -599,16 +599,16 @@ video {
   height: 78vh;
 }
 
+.h-96 {
+  height: 24rem;
+}
+
 .h-12 {
   height: 3rem;
 }
 
 .h-\[5vh\] {
   height: 5vh;
-}
-
-.h-16 {
-  height: 4rem;
 }
 
 .w-screen {
@@ -629,14 +629,6 @@ video {
 
 .w-12 {
   width: 3rem;
-}
-
-.w-16 {
-  width: 4rem;
-}
-
-.items-center {
-  align-items: center;
 }
 
 .justify-end {
@@ -757,8 +749,8 @@ video {
   padding-bottom: 2rem;
 }
 
-.pt-1 {
-  padding-top: 0.25rem;
+.align-middle {
+  vertical-align: middle;
 }
 
 .text-lg {
@@ -805,7 +797,6 @@ video {
 .cam-div {
   margin-bottom: 1.5rem;
   display: flex;
-  height: auto;
   width: 100%;
   justify-content: center;
   overflow: hidden;

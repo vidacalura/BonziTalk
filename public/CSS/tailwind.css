@@ -4,7 +4,7 @@
 
 .cam-div{
 
-    @apply rounded-lg flex justify-center bg-gray-100 w-full h-auto shadow-md overflow-hidden mb-6;
+    @apply rounded-lg flex justify-center bg-gray-100 w-full shadow-md overflow-hidden mb-6;
 
 }
 

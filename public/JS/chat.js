@@ -2,7 +2,7 @@ let socket = io();
 
 const videoGrid = document.getElementById("video-grid-1");
 const btnSairChamada = document.getElementById("btn-sair-chamada");
-//btnSairChamada.addEventListener("click", sairChamada);
+btnSairChamada.addEventListener("click", sairChamada);
 const chatDiv = document.getElementById("chat-div");
 const mensagensContainer = document.getElementById("mensagens-container");
 //const btnMinimizarChat = document.getElementById("btn-min-chat");
@@ -16,6 +16,8 @@ const btnChatEnviarMsg = document.getElementById("btn-chat-env");
 btnChatEnviarMsg.addEventListener("click", enviarMensagem);
 const menuParticipantesDiv = document.getElementById("menu-participantes");
 const participantesContainer = document.querySelector(".div-participantes-container");
+
+verificarLocalStorage();
 
 const meuVideo = document.createElement("video");
 meuVideo.muted = true;
@@ -32,32 +34,54 @@ socket.emit("updateParticipantes", {
     salaId
 });
 
-navigator.mediaDevices.getUserMedia({
-    video: videoOn,
-    audio: audioOn
-})
-.then((stream) => {
-    adicionarVideoStream(meuVideo, stream);
+if (videoOn == false){
+    socket.emit("usuarioConectadoSemCam", { salaId, pfp: localStorage.getItem("pfp") });
+    conectarNovoUsuarioSemCam(localStorage.getItem("pfp"));
+}
+if (videoOn || audioOn) {
+    navigator.mediaDevices.getUserMedia({
+        video: videoOn,
+        audio: audioOn
+    })
+    .then((stream) => {
+        adicionarVideoStream(meuVideo, stream);
 
-    peer.on("call", (call) => {
-        call.answer(stream);
+        peer.on("call", (call) => {
+            call.answer(stream);
 
-        const video = document.createElement("video");
-        call.on("stream", (userVideoStream) => {
-            adicionarVideoStream(video, userVideoStream);
-        }); 
+            const video = document.createElement("video");
+            call.on("stream", (userVideoStream) => {
+                adicionarVideoStream(video, userVideoStream);
+            }); 
+        });
+
+        socket.on("usuarioConectado", (userId) => {
+            conectarNovoUsuario(userId, stream);
+        });
     });
+}
 
-    socket.on("usuarioConectado", (userId) => {
-        conectarNovoUsuario(userId, stream);
+function verificarLocalStorage(){
 
-        /* socket.emit("updateParticipantes", { 
-            username: localStorage.getItem("username"), 
-            imgPath: localStorage.getItem("pfp"), 
-            salaId
-        }); */
-    });
-});
+    if (localStorage.length != 4){
+        alert("Para evitar problemas no sistema, pedimos que você não entre diretamente pelo link, mas sim, através da inserção do código da sala na página principal.");
+
+        window.location = "/";
+    }
+
+}
+
+function sairChamada(){
+
+    window.location = "/";
+
+}
+
+function renderCall(){
+
+    // Atualizar cams
+
+}
 
 function mostrarMenuParticipantes(){
 
@@ -113,6 +137,30 @@ function conectarNovoUsuario(id, stream){
     });
 
     peers[id] = call;
+
+}
+
+function conectarNovoUsuarioSemCam(pfp){
+
+    const videoDiv = document.createElement("div");
+    videoDiv.classList.add("cam-div");
+    videoDiv.classList.add("h-96");
+
+    const div = document.createElement("div");
+    div.className = "w-full h-full flex justify-center";
+    div.style.alignItems = "center";
+    
+    const pfpImg = document.createElement("img");
+    pfpImg.style.width = "auto";
+    pfpImg.style.height = "30%";
+    pfpImg.classList.add("rounded-full");
+    pfpImg.classList.add("shadow-md");
+    pfpImg.style.backgroundColor = "#333";
+    pfpImg.src = pfp;
+
+    div.appendChild(pfpImg);
+    videoDiv.appendChild(div);
+    videoGrid.appendChild(videoDiv);
 
 }
 
@@ -194,6 +242,10 @@ peer.on("open", (id) => {
 
 
 /* Server listeners */
+socket.on("usuarioConectadoSemCam", (data) => {
+    conectarNovoUsuarioSemCam(data);
+});
+
 socket.on("usuarioDesconectado", (data) => {
     if (peers[data])
         peers[data].close();
@@ -204,5 +256,8 @@ socket.on("registrarMensagem", (data) => {
 });
 
 socket.on("updateAbaParticipantes", (data) => {
-    atualizarMenuParticipantes(data);
+    const { participantes } = data;
+
+    if (salaId == data.salaId)
+        atualizarMenuParticipantes(participantes);
 });
