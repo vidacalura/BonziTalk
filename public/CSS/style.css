@@ -39,11 +39,12 @@ header{
 
     background-color: transparent;
     padding: 1em 2rem;
-    width: 100vw;
+    width: 95vw;
     display: flex;
-    cursor: pointer;
+    justify-content: space-between;
     transition: 0.5s;
     position: absolute;
+
 }
 
 header a{
@@ -326,12 +327,12 @@ input:checked + .slider:before {
 }
 
 #icon{
-    max-width:30px;
-    max-height:30px;
+    max-width: 1.5rem;
+    max-height: 1.5rem;
     width: auto;
     height: auto;
-    margin-left: 1050px;
     margin-top: 20px;
+    cursor: pointer;
 }
 
 .conteudo-principal{
@@ -532,6 +533,11 @@ footer h2{
 
 
 @media only screen and (max-width: 900px) {
+    header{
+
+        width: 90vw;
+
+    }
     .bottom{
         width: 100%;
         display: flex;

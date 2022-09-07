@@ -193,14 +193,14 @@ function atualizarMenuParticipantes(data){
 function enviarMensagem(){
 
     if (chatTextbox.value != "" /* && não é texto em branco */){
-        socket.emit("enviarMensagem", { salaId, texto: chatTextbox.value });
-        registrarMensagem(chatTextbox.value);
+        socket.emit("enviarMensagem", { salaId, texto: chatTextbox.value, pfp: localStorage.getItem("pfp") });
+        registrarMensagem(chatTextbox.value, localStorage.getItem("pfp"));
         chatTextbox.value = "";
     }
 
 }
 
-function registrarMensagem(texto){
+function registrarMensagem(texto, pfp){
 
     const mensagemDiv = document.createElement("div");
     mensagemDiv.classList.add("flex");
@@ -208,7 +208,7 @@ function registrarMensagem(texto){
     const pfpDiv = document.createElement("div");
     const pfpImagem = document.createElement("img");
     pfpImagem.className = "w-12 h-12 rounded-full object-cover shadow-md";
-    pfpImagem.src = localStorage.getItem("pfp");
+    pfpImagem.src = pfp;
     pfpDiv.appendChild(pfpImagem);
 
     const textoDiv = document.createElement("div");
@@ -251,7 +251,9 @@ socket.on("usuarioDesconectado", (data) => {
 });
 
 socket.on("registrarMensagem", (data) => {
-    registrarMensagem(data);
+    const { texto, pfp } = data;
+
+    registrarMensagem(texto, pfp);
 });
 
 socket.on("updateAbaParticipantes", (data) => {

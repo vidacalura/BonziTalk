@@ -8,6 +8,8 @@ const menuPreChamada = document.getElementById("menu-opcoes-chamada");
 const menuPrincipal = document.getElementById("menu-principal");
 const menuCriarSala = document.getElementById("menu-criar-sala");
 const menuEntrarSala = document.getElementById("menu-entrar-sala");
+const videoCheckBox = document.getElementById("switch-video");
+const audioCheckBox = document.getElementById("switch-audio");
 const menuBg = document.getElementById("menu-bg");
 
 localStorage.clear();
@@ -62,12 +64,19 @@ criarSalaBtn.addEventListener("click", () => {
     const username = document.getElementById("username-criar-sala").value;
     const participantes = document.getElementById("participantes-criar-sala").value; // String
 
+    console.log(username + " " + participantes);
+
     if (participantes >= 2 && participantes <= 10 && username != null && username != ""){
         menuCriarSala.style.display = "none";
+
+        socket.emit("criarSala", participantes);
 
         socket.on("receberCodigo", (data) => {
             mostrarMenuOpcoesChamada(username, data);
         });
+    }
+    else{
+        alert("Username ou número de participantes inválido.");
     }
 
 });
@@ -75,9 +84,7 @@ criarSalaBtn.addEventListener("click", () => {
 entrarSalaBtn.addEventListener("click", () => {
 
     const userName = document.getElementById("username-entrar-sala").value;
-    //alert('Antes');
     const cod = document.getElementById("codigo-entrar-sala").value;
-    //alert('Depois');
 
     // Validação
     if (userName != null && userName != "" && cod != null){
@@ -121,3 +128,19 @@ function salvarUsuarioLocal(username, cod, audio, video){
     window.location = "/:" + cod;
 
 }
+
+videoCheckBox.addEventListener("click", () => {
+    if (videoCheckBox.value == "on")
+        videoCheckBox.value = "off";
+    else 
+        videoCheckBox.value = "on";
+});
+
+audioCheckBox.addEventListener("click", () => {
+    if (audioCheckBox.value == "on")
+        audioCheckBox.value = "off";
+    else 
+        audioCheckBox.value = "on";
+
+    console.log(audioCheckBox.value);
+});
