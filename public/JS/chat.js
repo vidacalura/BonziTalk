@@ -22,8 +22,7 @@ verificarLocalStorage();
 const meuVideo = document.createElement("video");
 meuVideo.muted = true;
 
-const peer = new Peer(undefined, { host: "/", port: 3001 });
-const peers = { };
+var peer = new Peer();
 
 const videoOn = (localStorage.getItem("videoOn") == "on");
 const audioOn = (localStorage.getItem("audioOn") == "on");

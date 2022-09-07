@@ -8,171 +8,176 @@
     <script src="https://kit.fontawesome.com/f4f13ff542.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./CSS/style.css">
     <script src="./JS/salagen.js" defer> </script>
+    <script src="./JS/whiteMode.js" defer></script>
     <title> BonziTalk </title>
 </head>
+<body>
 
-<div class="overflow-hidden">
-    <body>
+    <div id="menu-bg" class="menu-bg">
+        <div id="myModal" class="main-modal">
 
-        <div id="menu-bg" class="menu-bg">
-            <div id="myModal" class="main-modal">
+            <div id="menu-principal">
+                <div>
+                    <h2> BEM-VINDO! </h2>
+                    <p> Escolha uma das opções abaixo: </p>
+                </div>
 
-                <span class="close"> <i class="fa-solid fa-x"> </i> </span>
+                <div class="menu-btn-div">
+                    <button id="menu-criar-sala-btn"> CRIAR SALA </button>
+                    <button id="menu-entrar-sala-btn"> ENTRAR </button>
+                </div>
+            </div>
 
-                <div id="menu-principal">
+            <div id="menu-criar-sala">
+                <div class="alinhar-centro">
+                    <div class="menu-titulo">
+                        <h2> CRIAR SALA </h2>
+                    </div>
+                </div>
+
+                <form>
+                    <div class="inputs">
+                        <input id="username-criar-sala" class="input" type="text" required>
+                        <label id="username"> USERNAME </label>
+                    </div>
+
+                    <div class="inputs">
+                        <input id="participantes-criar-sala" class="input" type="number" min="2" max="10" required>
+                        <label id="participantes"> PARTICIPANTES </label>
+                    </div>
+
+                    <div class="alinhar-centro">
+                        <div class="button" id="criar-sala-btn"> CRIAR SALA </div>
+                    </div>
+                </form>
+            </div>
+
+            <div id="menu-entrar-sala">
+                <div class="alinhar-centro">
+                    <div class="menu-titulo">
+                        <h2> ENTRAR </h2>
+                    </div>
+                </div>
+                
+                <form>
+                    <div class="inputs">
+                        <input id="username-entrar-sala" class="input" type="text" required>
+                        <label id="username"> USERNAME </label>
+                    </div>
+
+
+                    <div class="inputs">
+                        <input id="codigo-entrar-sala" type="text" class="input" required>
+                        <label id="participantes"> CÓDIGO DA SALA </label>
+                    </div>
+                    <div class="alinhar-centro">
+                        <div class="button" id="entrar-sala-btn"> ENTRAR </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Menu opções pré-chamada -->
+            <div id="menu-opcoes-chamada">
+                <h3> Escolha o que deseja ativar para a chamada: </h3>
+
+                <div class="switch-btns-menu-chamada">
                     <div>
-                        <h2> BEM-VINDO! </h2>
-                        <p> Escolha uma das opções abaixo: </p>
+                        <i class="fa-solid fa-microphone"></i>
+
+                        <label class="switch">
+                            <input type="checkbox" id="switch-audio">
+                            <span class="slider round"></span>
+                        </label>
                     </div>
 
-                    <div class="menu-btn-div">
-                        <button id="menu-criar-sala-btn"> CRIAR SALA </button>
-                        <button id="menu-entrar-sala-btn"> ENTRAR </button>
+                    <div>
+                        <i class="fa-solid fa-video"></i>
+
+                        <label class="switch">
+                            <input type="checkbox" id="switch-video">
+                            <span class="slider round"></span>
+                        </label>
                     </div>
                 </div>
 
-                <div id="menu-criar-sala">
-                    <div class="alinhar-centro">
-                        <div class="menu-titulo">
-                            <h2> CRIAR SALA </h2>
-                        </div>
-                    </div>
-
-                    <form>
-                        <label> USERNAME </label>
-                        <input id="username-criar-sala" type="text">
-
-                        <label> PARTICIPANTES </label>
-                        <input id="participantes-criar-sala" type="number" min="2" max="10">
-
-                        <div class="alinhar-centro">
-                            <div class="button" id="criar-sala-btn"> CRIAR SALA </div>
-                        </div>
-                    </form>
-                </div>
-
-                <div id="menu-entrar-sala">
-                    <div class="alinhar-centro">
-                        <div class="menu-titulo">
-                            <h2> ENTRAR </h2>
-                        </div>
-                    </div>
-                    
-                    <form>
-                        <label> USERNAME </label>
-                        <input id="username-entrar-sala" type="text">
-
-                        <label> CÓDIGO DA SALA </label>
-                        <input id="codigo-entrar-sala" type="text" placeholder="Ex: AW3R5">
-
-                        <div class="alinhar-centro">
-                            <div class="button" id="entrar-sala-btn"> ENTRAR </div>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Menu opções pré-chamada -->
-                <div id="menu-opcoes-chamada">
-                    <h3> Escolha o que deseja ativar para a chamada: </h3>
-
-                    <div class="switch-btns-menu-chamada">
-                        <div>
-                            <i class="fa-solid fa-microphone"></i>
-
-                            <label class="switch">
-                                <input type="checkbox" value="off" id="switch-audio">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-
-                        <div>
-                            <i class="fa-solid fa-video"></i>
-
-                            <label class="switch">
-                                <input type="checkbox" value="off" id="switch-video">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="button margin0auto" id="efetuar-conexao-chamada"> Feito </div>
-                </div>
+                <div class="button margin0auto" id="efetuar-conexao-chamada"> Feito </div>
             </div>
         </div>
+    </div>
 
 
-        <header>
-            <a href="#">
-                <img src="./img/bonzitalk logo.png" alt="logo-header">
-                <h2> BonziTalk </h2>
-            </a>
-        </header>
+    <header>
+        <a href="#">
+            <img src="./img/bonzitalk logo.png" alt="logo-header">
+            <h2 id="h2-nav"> BonziTalk </h2>
+        </a>
+        <img src="./img/moon-icon.png" id="icon">
+    </header>
 
-        <main class="conteudo">
-            <section class="conteudo-principal">
-                <div class="conteudo-texto">
-                    <h1>Converse a hora que quiser!</h1>
-                    <h3>Com o bonziTalk você pode ficar à vontade e jogar a conversa fora.</h3>
-                    <div class="alinhar-centro">
-                        <button id="myBtn"> Começar </button>
-                    </div>
+    <main class="conteudo">
+        <section class="conteudo-principal">
+            <div class="conteudo-texto">
+                <h1>Converse a hora que quiser!</h1>
+                <h3>Com o bonziTalk você pode ficar à vontade e jogar a conversa fora.</h3>
+                <div class="alinhar-centro">
+                    <button id="myBtn"> Começar </button>
                 </div>
-                <div class="conteudo-imagem">
-                    <div class="alinhar-centro">
-                        <img src="./img/teste-laptop.png" alt="laptop" class="img-laptop">
-                    </div>
-                </div>
-            </section>
-            <section class="conteudo-meio">
-                <div class="conteudo-meio-termo">
-                    <div class="conteudo-meio-texto">
-                        <h2>Totalmente Anônimo</h2>
-                        <p>Com o Bonzitalk você não precisa se preocupar com criação de contas e "burocracias" do tipo. Nós pensamos exatamente em você que odeia estes atrasos.</p>
-                    </div>
-                    <div class="conteudo-meio-imagem-div alinhar-centro">
-                        <div class="conteudo-meio-imagem">
-                            <img src="img/hacker2.png" alt="">
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="conteudo-baixo">
-                <div class="bottom">
-                    <div class="squares">
-                        <div class="square">
-                            <div class="alinhar-centro imagem-square">
-                                <img src="./img/bonzi chat.png" alt="chat">
-                            </div>
-                            <div class="text1">
-                                <h2>"Manda a boa!"</h2>
-                                <p>Converse com seus colegas, amigos, parentes sem pagar nada.</p>
-                            </div>
-                        </div>
-                        <div class="square">
-                            <div class="alinhar-centro imagem-square">
-                                <img src="./img/bonzi call.png" alt="chat">
-                            </div>
-                            <div class="text1">
-                                <h2>"Olho no olho"</h2>
-                                <p>Faça chamadas de vídeo com qualquer pessoa.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer class="rodape">
-            <div class="logo-rodape">
-                <h2>BonziTech</h2>
             </div>
-            <div class="media">
-            <ul>
-                <li><a href="https://www.instagram.com/bonzitech/" target="_blank"><i class="fa-brands fa-instagram fa-xl"></i></a></li>
-                <li><a href="https://github.com/vidacalura/BonziTalk" target="_blank"><i class="fa-brands fa-github fa-xl"></i></a></li>
-            </ul>
+            <div class="conteudo-imagem">
+                <div class="alinhar-centro">
+                    <img src="./img/teste-laptop.png" alt="laptop" class="img-laptop">
+                </div>
+            </div>
+        </section>
+        <section class="conteudo-meio">
+            <div class="conteudo-meio-termo">
+                <div class="conteudo-meio-texto">
+                    <h2>Totalmente Anônimo</h2>
+                    <p>Com o Bonzitalk você não precisa se preocupar com criação de contas e "burocracias" do tipo. Nós pensamos exatamente em você que odeia estes atrasos.</p>
+                </div>
+                <div class="conteudo-meio-imagem-div alinhar-centro">
+                    <div class="conteudo-meio-imagem">
+                        <img src="img/hacker2.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="conteudo-baixo">
+            <div class="bottom">
+                <div class="squares">
+                    <div class="square">
+                        <div class="alinhar-centro imagem-square">
+                            <img src="./img/bonzi chat.png" alt="chat">
+                        </div>
+                        <div class="text1">
+                            <h2>"Manda a boa!"</h2>
+                            <p>Converse com seus colegas, amigos, parentes sem pagar nada.</p>
+                        </div>
+                    </div>
+                    <div class="square">
+                        <div class="alinhar-centro imagem-square">
+                            <img src="./img/bonzi call.png" alt="chat">
+                        </div>
+                        <div class="text1">
+                            <h2>"Olho no olho"</h2>
+                            <p>Faça chamadas de vídeo com qualquer pessoa.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="rodape">
+        <div class="logo-rodape">
+            <h2 id="h2-rodape">BonziTech</h2>
         </div>
-        </footer>
-    </body>
-</div>
+        <div class="media">
+        <ul>
+            <li><a href="https://www.instagram.com/bonzitech/" target="_blank"><i class="fa-brands fa-instagram fa-xl"></i></a></li>
+            <li><a href="https://github.com/vidacalura/BonziTalk" target="_blank"><i class="fa-brands fa-github fa-xl"></i></a></li>
+        </ul>
+    </div>
+    </footer>
+</body>
 </html>

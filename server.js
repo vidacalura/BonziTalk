@@ -1,16 +1,64 @@
 const express = require("express");
 
 const app = express();
-const server = require("http").Server(app);
 
 const port = process.env.PORT || 5000;
+
+//HTTPS ==========================================
+var fs = require('fs');
+var https_options = {
+	key: fs.readFileSync("/home/ubuntu/BonziTalk/certificados/private.key", 'utf8'),
+	cert: fs.readFileSync("/home/ubuntu/BonziTalk/certificados/certificate.crt", 'utf8'),
+	ca: fs.readFileSync('/home/ubuntu/BonziTalk/certificados/ca_bundle.crt', 'utf8'),
+};
+
+/*
+	const { PeerServer } = require('peer');
+
+	const peer = PeerServer({
+		path: "/peerjs",
+		port: 3399,
+    		ssl: {
+    			key: fs.readFileSync('/home/ubuntu/BonziTalk/certificados/private.key'),
+    			cert: fs.readFileSync('/home/ubuntu/BonziTalk/certificados/certificate.crt')
+		}
+	});
+
+
+app.use('/peerjs', require('peer').ExpressPeerServer(srv, {
+	debug: true,
+        port: 3399,
+        ssl: {
+        	key: fs.readFileSync('/home/ubuntu/BonziTalk/certificados/private.key'),
+                cert: fs.readFileSync('/home/ubuntu/BonziTalk/certificados/certificate.crt')
+	}
+}))
+*/
+
+const server = require("https").Server(https_options, app);
+
 
 /* Express.js */
 app.set("view engine", "ejs");
 app.use(express.static("./public/"));
+//app.use(express.static("/home/ubuntu/BonziTalk/public/"));
+
+// CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.get("/", (req, res) => {
     res.status(200).sendFile("index.html", { root: __dirname });
+});
+
+//app.get("/peerjs", (req, res) => {
+//});
+
+app.get("/.well-known/pki-validation/0643E246AE4E9614D391EBF1752264A2.txt", (req, res) => {
+    res.status(200).sendFile("0643E246AE4E9614D391EBF1752264A2.txt", { root: __dirname });
 });
 
 app.get("/:sala", (req, res) => {
@@ -155,6 +203,16 @@ function codeAle(){
     return result;
 }
 
-server.listen(port);
+srv = server.listen(port);
+
+app.use('/peerjs', require('peer').ExpressPeerServer(srv, {
+        debug: true,
+        //port: 3399,
+        ssl: {
+                key: fs.readFileSync('/home/ubuntu/BonziTalk/certificados/private.key'),
+                cert: fs.readFileSync('/home/ubuntu/BonziTalk/certificados/certificate.crt')
+        }
+}))
+
 
 // Apenas áudio = 2 cams

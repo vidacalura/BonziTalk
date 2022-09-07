@@ -8,8 +8,6 @@ const menuPreChamada = document.getElementById("menu-opcoes-chamada");
 const menuPrincipal = document.getElementById("menu-principal");
 const menuCriarSala = document.getElementById("menu-criar-sala");
 const menuEntrarSala = document.getElementById("menu-entrar-sala");
-const videoCheckBox = document.getElementById("switch-video");
-const audioCheckBox = document.getElementById("switch-audio");
 const menuBg = document.getElementById("menu-bg");
 
 localStorage.clear();
@@ -21,7 +19,7 @@ var modal = document.getElementById("myModal");
 var btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+//var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
@@ -33,13 +31,15 @@ btn.onclick = function() {
 }
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    esconderModal();
-}
+/*span.onclick = function() {
+    modal.style.display = "none";
+}*/
 
 window.onclick = function(event) {
     if (event.target.id == "menu-bg") {
-        esconderModal();
+        modal.style.display = "none";
+        menuBg.style.display = "none";
+        menuPreChamada.style.display = "none";
     }
 }
 
@@ -65,8 +65,6 @@ criarSalaBtn.addEventListener("click", () => {
     if (participantes >= 2 && participantes <= 10 && username != null && username != ""){
         menuCriarSala.style.display = "none";
 
-        socket.emit("criarSala", participantes);
-
         socket.on("receberCodigo", (data) => {
             mostrarMenuOpcoesChamada(username, data);
         });
@@ -76,16 +74,19 @@ criarSalaBtn.addEventListener("click", () => {
 
 entrarSalaBtn.addEventListener("click", () => {
 
-    const username = document.getElementById("username-entrar-sala").value;
+    const userName = document.getElementById("username-entrar-sala").value;
+    //alert('Antes');
     const cod = document.getElementById("codigo-entrar-sala").value;
+    //alert('Depois');
 
     // Validação
-    if (username != null && username != "" && cod != null){
+    if (userName != null && userName != "" && cod != null){
         menuEntrarSala.style.display = "none";
 
-        mostrarMenuOpcoesChamada(username, cod);
-    }
+        socket.emit("conectarSala", { cod, userId: userName });
 
+        mostrarMenuOpcoesChamada(userName, cod);
+    }
 });
 
 function mostrarMenuOpcoesChamada(username, cod){
@@ -120,25 +121,3 @@ function salvarUsuarioLocal(username, cod, audio, video){
     window.location = "/:" + cod;
 
 }
-
-function esconderModal(){
-    modal.style.display = "none";
-    menuBg.style.display = "none";
-    menuPreChamada.style.display = "none";
-}
-
-videoCheckBox.addEventListener("click", () => {
-    if (videoCheckBox.value == "on")
-        videoCheckBox.value = "off";
-    else 
-        videoCheckBox.value = "on";
-});
-
-audioCheckBox.addEventListener("click", () => {
-    if (audioCheckBox.value == "on")
-        audioCheckBox.value = "off";
-    else 
-        audioCheckBox.value = "on";
-
-    console.log(audioCheckBox.value);
-});
