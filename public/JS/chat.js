@@ -19,10 +19,32 @@ const participantesContainer = document.querySelector(".div-participantes-contai
 
 verificarLocalStorage();
 
+/* Convite */
+const menuWrapper = document.getElementById("menu-convite-wrapper");
+const menuConvite = document.getElementById("menu-convite");
+const textboxConvite = document.getElementById("convite-textbox");
+const menuConviteBtn = document.getElementById("menu-convite-btn");
+textboxConvite.value = window.location.pathname.slice(2);
+
+menuWrapper.addEventListener("click", (e) => {
+    if (e.target.id == "menu-convite-wrapper"){
+        menuConvite.classList.add("hidden");
+        menuWrapper.classList.add("hidden");
+    }
+});
+
+menuConviteBtn.addEventListener("click", () => {
+    textboxConvite.select();
+    textboxConvite.setSelectionRange(0, 99999);
+
+    navigator.clipboard.writeText(textboxConvite.value);
+});
+
 const meuVideo = document.createElement("video");
 meuVideo.muted = true;
 
 var peer = new Peer();
+const peers = {  };
 
 const videoOn = (localStorage.getItem("videoOn") == "on");
 const audioOn = (localStorage.getItem("audioOn") == "on");
@@ -33,10 +55,6 @@ socket.emit("updateParticipantes", {
     salaId
 });
 
-if (videoOn == false){
-    socket.emit("usuarioConectadoSemCam", { salaId, pfp: localStorage.getItem("pfp") });
-    conectarNovoUsuarioSemCam(localStorage.getItem("pfp"));
-}
 if (videoOn || audioOn) {
     navigator.mediaDevices.getUserMedia({
         video: videoOn,
@@ -58,6 +76,10 @@ if (videoOn || audioOn) {
             conectarNovoUsuario(userId, stream);
         });
     });
+}
+else {
+    socket.emit("usuarioConectadoSemCam", { salaId, pfp: localStorage.getItem("pfp") });
+    conectarNovoUsuarioSemCam(localStorage.getItem("pfp"));
 }
 
 function verificarLocalStorage(){
@@ -173,15 +195,18 @@ function atualizarMenuParticipantes(data){
     for (let i = data.length - 1; i > 0; i--){
         const divParticipante = document.createElement("div");
         const pfpParticipante = document.createElement("img");
+        const pfpDiv = document.createElement("div");
         const nomeParticipante = document.createElement("p");
 
+        pfpDiv.style.width = "30%";
         pfpParticipante.src = data[i][1];
-        pfpParticipante.className = "w-16 h-16 rounded-full";
+        pfpParticipante.className = "w-12 h-12 rounded-full";
         nomeParticipante.textContent = data[i][0];
-        nomeParticipante.className = "text-lg pt-1 font-bold";
+        nomeParticipante.className = "text-lg font-bold";
 
-        divParticipante.className = "flex gap-4 items-center px-2";
-        divParticipante.appendChild(pfpParticipante);
+        divParticipante.className = "flex gap-2 items-center px-8 pt-8";
+        pfpDiv.appendChild(pfpParticipante)
+        divParticipante.appendChild(pfpDiv);
         divParticipante.appendChild(nomeParticipante);
 
         participantesContainer.appendChild(divParticipante);
@@ -232,6 +257,7 @@ chatTextbox.addEventListener("keyup", (e) => {
         enviarMensagem();
     }
 });
+
 
 
 /* PeerJS */
