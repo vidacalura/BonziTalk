@@ -64,16 +64,19 @@ criarSalaBtn.addEventListener("click", () => {
     const username = document.getElementById("username-criar-sala").value;
     const participantes = document.getElementById("participantes-criar-sala").value; // String
 
-    console.log(username + " " + participantes);
-
     if (participantes >= 2 && participantes <= 10 && username != null && username != ""){
-        menuCriarSala.style.display = "none";
+        if (username.length <= 12){
+            menuCriarSala.style.display = "none";
 
-        socket.emit("criarSala", participantes);
+            socket.emit("criarSala", participantes);
 
-        socket.on("receberCodigo", (data) => {
-            mostrarMenuOpcoesChamada(username, data);
-        });
+            socket.on("receberCodigo", (data) => {
+                mostrarMenuOpcoesChamada(username, data);
+            });
+        }
+        else {
+            alert("Username muito grande. Reescreva-o com até 12 caracteres");
+        }
     }
     else{
         alert("Username ou número de participantes inválido.");
@@ -88,11 +91,16 @@ entrarSalaBtn.addEventListener("click", () => {
 
     // Validação
     if (userName != null && userName != "" && cod != null){
-        menuEntrarSala.style.display = "none";
+        if (userName.length <= 12){
+            menuEntrarSala.style.display = "none";
 
-        socket.emit("conectarSala", { cod, userId: userName });
+            socket.emit("conectarSala", { cod, userId: userName });
 
-        mostrarMenuOpcoesChamada(userName, cod);
+            mostrarMenuOpcoesChamada(userName, cod);
+        }
+        else {
+            alert("Username muito grande. Reescreva-o com até 12 caracteres");
+        }
     }
 });
 

@@ -16,6 +16,7 @@ const btnChatEnviarMsg = document.getElementById("btn-chat-env");
 btnChatEnviarMsg.addEventListener("click", enviarMensagem);
 const menuParticipantesDiv = document.getElementById("menu-participantes");
 const participantesContainer = document.querySelector(".div-participantes-container");
+let userDivArr = [];
 
 verificarLocalStorage();
 
@@ -52,8 +53,11 @@ const audioOn = (localStorage.getItem("audioOn") == "on");
 socket.emit("updateParticipantes", { 
     username: localStorage.getItem("username"), 
     imgPath: localStorage.getItem("pfp"), 
-    salaId
+    salaId,
+    videoOn
 });
+
+renderCallRequest();
 
 if (videoOn || audioOn) {
     navigator.mediaDevices.getUserMedia({
@@ -61,7 +65,12 @@ if (videoOn || audioOn) {
         audio: audioOn
     })
     .then((stream) => {
-        adicionarVideoStream(meuVideo, stream);
+        // if (videoOn)
+            adicionarVideoStream(meuVideo, stream);
+        /* else {
+            socket.emit("usuarioConectadoSemCam", { salaId, pfp: localStorage.getItem("pfp") });
+            conectarNovoUsuarioSemCam(localStorage.getItem("pfp"));
+        } */
 
         peer.on("call", (call) => {
             call.answer(stream);
@@ -69,7 +78,7 @@ if (videoOn || audioOn) {
             const video = document.createElement("video");
             call.on("stream", (userVideoStream) => {
                 adicionarVideoStream(video, userVideoStream);
-            }); 
+            });         
         });
 
         socket.on("usuarioConectado", (userId) => {
@@ -98,9 +107,26 @@ function sairChamada(){
 
 }
 
-function renderCall(){
+function renderCallRequest(){
 
-    // Atualizar cams
+    const idSala = salaId
+
+    socket.emit("getParticipantes", idSala);
+
+}
+
+function renderCall(participantes, id){
+
+    if (socket.id == id){
+        for (const participante of participantes){
+            if (participante[1] != undefined){
+                if (participante[2] != socket.id){
+                    if (!participante[3])
+                        conectarNovoUsuarioSemCam(participante[1]);
+                }
+            }
+        }
+    }
 
 }
 
@@ -183,6 +209,8 @@ function conectarNovoUsuarioSemCam(pfp){
     videoDiv.appendChild(div);
     videoGrid.appendChild(videoDiv);
 
+    userDivArr.push(videoDiv);
+
 }
 
 function atualizarMenuParticipantes(data){
@@ -248,6 +276,8 @@ function registrarMensagem(texto, pfp){
 
     mensagensContainer.appendChild(mensagemDiv);
 
+    mensagensContainer.scrollTop = mensagensContainer.scrollHeight;
+
 }
 
 chatTextbox.addEventListener("keyup", (e) => {
@@ -282,9 +312,45 @@ socket.on("registrarMensagem", (data) => {
     registrarMensagem(texto, pfp);
 });
 
+socket.on("receiveParticipantes", (data) => {
+    const { participantes, id } = data;
+
+    renderCall(participantes, id);
+});
+
+socket.on("removerDivUsuario", (data) => {
+
+    if (data.salaId == salaId){
+        console.log(data);
+        for (let i = 0; i < userDivArr.length - 1; i++){
+            const imgDiv = userDivArr[i].firstChild.firstChild.src;
+            const imgDivSrc = imgDiv.substring(imgDiv.indexOf("img"));
+
+            if (imgDivSrc == data.pfp){
+                console.log(data);
+                
+                userDivArr[i].remove();
+                userDivArr.splice(i, 1);
+                i = 100;
+            }
+        }
+    }
+
+});
+
 socket.on("updateAbaParticipantes", (data) => {
     const { participantes } = data;
 
-    if (salaId == data.salaId)
+    if (salaId == data.salaId){
         atualizarMenuParticipantes(participantes);
+
+        const participantesQuant = participantes.length - 1;
+        if (participantesQuant <= 2)
+            videoGrid.className = "md:flex md:gap-4";
+        if (participantesQuant > 2 && participantesQuant <= 4)
+            videoGrid.className = "md:grid md:grid-flow-col md:grid-rows-2 md:gap-4";
+        if (participantesQuant > 4)
+            videoGrid.className = "md:grid md:grid-flow-col md:grid-rows-3 md:gap-4";
+    }
+
 });
