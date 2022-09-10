@@ -218,7 +218,8 @@ header img{
     transition: 0.5s ease-in-out;
     font-size: 20px;
 }
-.main-modal form .button{
+.main-modal form .button,
+.button-404{
 
     text-align: center;
     margin-top: 0.8rem;
@@ -531,6 +532,47 @@ footer h2{
     list-style-type: none;
 }
 
+.main-404{
+
+    text-align: center;
+    padding-top: 30vh;
+    display: flex;
+    justify-content: center;
+    gap: 8rem;
+
+}
+.bonzi-404{
+
+    padding-top: 4rem;
+    height: 280px;
+
+}
+.h1-404{
+
+    font-size: 72px;
+    color: white;
+
+}
+.h2-404{
+
+    padding: 1.25rem 0px;
+    color: white;
+    font-weight: normal;
+    font-size: 32px;
+
+}
+.p-404{
+
+    color: darkgray;
+    padding-bottom: 3rem;
+
+}
+.button-404{
+
+    box-shadow: 0px 4px 31px 8px rgba(0, 0, 0, 0.25);
+
+}
+
 
 @media only screen and (max-width: 900px) {
     header{
@@ -587,15 +629,24 @@ footer h2{
         font-weight: 600;
     }
 
+    .main-404{
+
+        display: block;
+
+    }
+    .bonzi-404{
+        display: none;
+    }
+
 }
 
 body::-webkit-scrollbar {
     width: 8px;
-  }
-  
-  body::-webkit-scrollbar-thumb{
+}
+
+body::-webkit-scrollbar-thumb{
     height: 10%;
     border-radius: 20px;
     background-color: transparent;
     border: 4px solid darkgray;
-  }
+}
