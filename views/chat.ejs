@@ -39,7 +39,11 @@
 
         <main class="flex">
             
-            <section class="h-screen w-screen lg:w-[70vw]">
+            <nav class="absolute w-screen flex justify-end p-4 text-xl lg:hidden">
+                <i id="chat-hamburger" class="fa-sharp fa-solid fa-bars cursor-pointer z-20"> </i>
+            </nav>
+
+            <section class="h-screen w-screen lg:w-[70vw] pt-8 lg:pt-0">
                 <!-- Vídeo chat -->
                 <div id="video-grid-container" class="p-8">
                     <div id="video-grid-1" class="md:flex md:gap-4">
@@ -55,34 +59,34 @@
                 </div>
             </section>
 
-            <section class="hidden lg:block shadow-md">
+            <section id="chat-section" class="hidden lg:block shadow-md">
                 <!-- Chat -->
-                <div id="chat-div" class="bg-gray-100 fixed rounded-tl-3xl right-0 bottom-0 w-[25vw] h-[90vh]">
+                <div id="chat-div" class="bg-gray-100 fixed lg:rounded-tl-3xl right-0 bottom-0 w-screen h-screen lg:w-[25vw] lg:h-[90vh]">
                     <!-- Botões chat -->
-                    <div class="flex w-full justify-end absolute px-4 pt-4">
+                    <div class="flex w-full z-30 lg:justify-end absolute px-4 pt-4">
                         <!-- Botão participantes -->
                         <div class=""> <button id="btn-participantes-menu" title="Participantes" class="bg-gray-400 w-10 h-10 rounded-full shadow-sm"> <i class="fa-solid fa-user-group"> </i> </button> </div>
                     </div>
 
                     <!-- Mensagens -->
                     <div id="mensagens-container" class="w-full h-[78vh] pt-20 px-8 text-lg overflow-y-scroll overflow-x-hidden">
-                        <div class="flex md:hidden md:grid md:grid-flow-col md:grid-rows-2 md:grid-rows-3 md:gap-4 align-middle h-96">
-                            <div class=""> <img src="https://imgs.search.brave.com/cC3e76N5GY0y2Cye-OfkVorA563rzczHbnnuPHza8EY/rs:fit:1200:1079:1/g:ce/aHR0cHM6Ly9pLmt5/bS1jZG4uY29tL2Vu/dHJpZXMvaWNvbnMv/b3JpZ2luYWwvMDAw/LzAzMy80MjEvY292/ZXIyLmpwZw" alt="" class="w-12 h-12 rounded-full object-cover shadow-md"> </div>
-                            <div class="p-2 pt-12 pt-8 w-12 h-12"> <p class="bg-gray-300 rounded-lg w-full p-3 shadow-sm"> Bruh </p> </div>
+                        <div class="hidden">
+                            <div class="hidden"> <img src="https://imgs.search.brave.com/cC3e76N5GY0y2Cye-OfkVorA563rzczHbnnuPHza8EY/rs:fit:1200:1079:1/g:ce/aHR0cHM6Ly9pLmt5/bS1jZG4uY29tL2Vu/dHJpZXMvaWNvbnMv/b3JpZ2luYWwvMDAw/LzAzMy80MjEvY292/ZXIyLmpwZw" alt="" class="md:grid md:grid-flow-col md:grid-rows-2 md:grid-rows-3 md:gap-4 align-middle h-96 w-12 h-12 rounded-full object-cover shadow-md"> </div>
+                            <div class="p-2 pt-12 pt-8 w-12 hidden md:hidden h-12"> <p class="bg-gray-300 rounded-lg w-full p-3 shadow-sm"> Bruh </p> </div>
                         </div>
                     </div>
 
                     <!-- Textbox -->
                     <div class="flex w-[25vw] 2xl:text-2xl absolute bottom-3 gap-2 px-6 2xl:px-12">
-                        <input type="text" id="chat-textbox" class="text-gray-300 border-none outline-none w-full h-[5vh] rounded-full px-3 p-1 shadow-md" placeholder="Digite aqui!">
+                        <input type="text" id="chat-textbox" class="text-gray-300 border-none outline-none w-[80vw] lg:w-full h-[5vh] rounded-full px-3 p-1 shadow-md" placeholder="Digite aqui!">
                         <button id="btn-chat-env" title="Enviar" class="bg-gray-400 rounded-full px-3 shadow-md"> > </button>
                     </div> 
                 </div>
 
                 <!-- Aba de Participantes -->
-                <div id="menu-participantes" class="hidden bg-gray-100 fixed rounded-tl-3xl right-0 bottom-0 w-[25vw] h-[90vh]">
+                <div id="menu-participantes" class="hidden bg-gray-100 fixed lg:rounded-tl-3xl right-0 bottom-0 w-screen h-screen lg:w-[25vw] lg:h-[90vh]">
                     <!-- Botões menu participantes -->
-                    <div class="flex w-full justify-end absolute px-4 pt-4">
+                    <div class="flex w-full lg:justify-end absolute px-4 pt-4">
                         <!-- Botão voltar para chat -->
                         <div class=""> <button id="btn-chat" title="Chat" class="bg-gray-400 w-10 h-10 rounded-full shadow-sm opacity-80"> <i class="fa-solid fa-message"> </i> </button> </div>
                     </div>

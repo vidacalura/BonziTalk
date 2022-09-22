@@ -87,7 +87,7 @@ criarSalaBtn.addEventListener("click", () => {
 entrarSalaBtn.addEventListener("click", () => {
 
     const userName = document.getElementById("username-entrar-sala").value;
-    const cod = document.getElementById("codigo-entrar-sala").value;
+    const cod = document.getElementById("codigo-entrar-sala").value.toUpperCase();
 
     // Validação
     if (userName != null && userName != "" && cod != null){
@@ -151,4 +151,9 @@ audioCheckBox.addEventListener("click", () => {
         audioCheckBox.value = "on";
 
     console.log(audioCheckBox.value);
+});
+
+socket.on("salaInexistente", (id) => {
+    if (socket.id == id)
+        window.location = "/404.html";
 });

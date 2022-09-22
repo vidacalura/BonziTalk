@@ -100,7 +100,14 @@ const io = require("socket.io")(server);
 io.on("connection", (socket) => {
 
     socket.on("conectarSala", (data) => {
-        const { salaId, userId } = data;
+        const userId = data.userId;
+        
+	if (data.salaId != undefined)
+            salaId = (typeof(data.salaId) == "string" ? data.salaId.toUpperCase() : data.salaId);
+        else
+            salaId = ":" + (typeof(data.cod) == "string" ? data.cod.toUpperCase() : data.cod);
+
+        let salaExiste = false;
 
         // verificação de existência da sala
         for (let  i = 0; i < 25; i++){
@@ -109,11 +116,12 @@ io.on("connection", (socket) => {
                     socket.join(salaId);
                     socket.to(salaId).emit("usuarioConectado", userId);
                     salas[i].conexoesSala++;
-            }
-            else{
-                // Sala não existe
+                    salaExiste = true;
             }
         }
+
+        if (!salaExiste)
+            io.sockets.emit("salaInexistente", socket.id);
 
         socket.on("disconnect", () => {
             socket.to(salaId).emit("usuarioDesconectado", userId);
@@ -127,7 +135,8 @@ io.on("connection", (socket) => {
         // Criar sala
         const salaNum = salasLivres[0];
 
-        salas[salaNum].salaId = codeAle();
+        const codeAleRes = codeAle();
+        salas[salaNum].salaId = ":" + codeAleRes;
 
         if (Number(participantes) <= 10 && Number(participantes) >= 2)
             salas[salaNum].participantesMax = Number(participantes);
@@ -137,14 +146,13 @@ io.on("connection", (socket) => {
         // Update participantes - Backend
         salas[salaNum].conexoesSala++;
 
-
-        io.sockets.emit("receberCodigo", salas[salaNum].salaId);
+        io.sockets.emit("receberCodigo", codeAleRes);
 
     });
 
     socket.on("usuarioConectadoSemCam", (data) => {
         const { salaId, pfp } = data;
-        
+
         socket.to(salaId).emit("usuarioConectadoSemCam", pfp);
     });
 
@@ -152,7 +160,7 @@ io.on("connection", (socket) => {
         const { username, imgPath, salaId, videoOn } = data;
 
         const userInfo = [username, imgPath, socket.id, videoOn];
-       
+
         for (let  i = 0; i < 25; i++){
             if (salaId == salas[i].salaId){
                 salas[i].participantes.push(userInfo);
@@ -179,11 +187,8 @@ io.on("connection", (socket) => {
                 salaIndex = i;
             }
         }
-		
-		//if (salaIndex != null) {
-		io.sockets.emit("receiveParticipantes", { participantes: salas[salaIndex].participantes, id: socket.id});
-		//}
-        
+
+        io.sockets.emit("receiveParticipantes", { participantes: salas[salaIndex].participantes, id: socket.id});
     });
 
     socket.on("disconnect", () => {
@@ -196,7 +201,7 @@ io.on("connection", (socket) => {
                         }
 
                         salas[i].participantes.splice(j, 1);
-    
+
                         salas[i].conexoesSala--;
 
                         const participantes = salas[i].participantes;

@@ -16,6 +16,8 @@ const btnChatEnviarMsg = document.getElementById("btn-chat-env");
 btnChatEnviarMsg.addEventListener("click", enviarMensagem);
 const menuParticipantesDiv = document.getElementById("menu-participantes");
 const participantesContainer = document.querySelector(".div-participantes-container");
+const chatSection = document.getElementById("chat-section");
+const chatHamburger = document.getElementById("chat-hamburger");
 let userDivArr = [];
 
 verificarLocalStorage();
@@ -39,6 +41,13 @@ menuConviteBtn.addEventListener("click", () => {
     textboxConvite.setSelectionRange(0, 99999);
 
     navigator.clipboard.writeText(textboxConvite.value);
+});
+
+chatHamburger.addEventListener("click", () => {
+    if (chatSection.className.includes("hidden"))
+        chatSection.classList.remove("hidden");
+    else if (!chatSection.className.includes("hidden"))
+        chatSection.classList.add("hidden");
 });
 
 const meuVideo = document.createElement("video");
@@ -157,6 +166,10 @@ function adicionarVideoStream(video, stream){
 
     const videoDiv = document.createElement("div");
     videoDiv.classList.add("cam-div");
+    
+    if (video.parentElement != null)
+        video.parentElement.remove();
+
     videoDiv.appendChild(video);
 
     video.classList.add("object-cover");
@@ -321,14 +334,11 @@ socket.on("receiveParticipantes", (data) => {
 socket.on("removerDivUsuario", (data) => {
 
     if (data.salaId == salaId){
-        console.log(data);
         for (let i = 0; i < userDivArr.length - 1; i++){
             const imgDiv = userDivArr[i].firstChild.firstChild.src;
             const imgDivSrc = imgDiv.substring(imgDiv.indexOf("img"));
 
             if (imgDivSrc == data.pfp){
-                console.log(data);
-                
                 userDivArr[i].remove();
                 userDivArr.splice(i, 1);
                 i = 100;
